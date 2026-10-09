@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Poster · Workout Vending Machine</title>
   <meta name="robots" content="noindex">
-  <link rel="icon" href="assets/logo.png">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -43,12 +44,10 @@
     .p-top::after { width: 70mm; height: 70mm; left: -30mm; bottom: -20mm; }
 
     .p-brand { position: relative; display: flex; align-items: center; gap: 4mm; }
-    .p-brand img { width: 16mm; height: 16mm; border-radius: 4mm; box-shadow: 0 2mm 5mm rgba(0,0,0,.2); }
-    .p-brand strong { display: block; font-family: var(--font-display); font-stretch: 115%; font-weight: 800; font-size: 6mm; letter-spacing: -.02em; line-height: 1.1; }
-    .p-brand small { font-size: 3.2mm; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+    .p-brand img { height: 24mm; width: auto; }
 
     .p-title {
-      position: relative; margin: 10mm 0 0; font-family: var(--font-display); font-stretch: 125%;
+      position: relative; margin: 6mm 0 0; font-family: var(--font-display); font-stretch: 125%;
       font-weight: 900; text-transform: uppercase; line-height: .86; letter-spacing: -.03em; font-size: 19mm;
     }
     .p-title span { display: block; }
@@ -95,7 +94,7 @@
 <body class="poster-page">
 
   <div class="toolbar">
-    <span>QR code points to <code id="qr-url"></code></span>
+    <span>QR Code currently points to <code id="qr-url"></code></span>
     <button class="btn btn-primary btn-sm" type="button" onclick="window.print()">Print poster</button>
   </div>
 
@@ -104,8 +103,7 @@
       <div class="sheet" id="sheet">
         <div class="p-top">
           <div class="p-brand">
-            <img src="assets/logo.png" alt="">
-            <div><strong data-site-text="name">Living the Dream</strong><small data-site-text="tagline">Athletic Performance</small></div>
+            <img src="assets/logo-white.png" alt="Living the Dream — Athletic Performance">
           </div>
           <h1 class="p-title"><span>Workout</span><span>Vending</span><span>Machine</span></h1>
         </div>

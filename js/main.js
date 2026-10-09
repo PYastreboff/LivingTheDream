@@ -70,9 +70,10 @@
     const cat = cats[window.Vend.dayNumber() % cats.length];
     const w = window.Vend.pickToday(cat.id);
     if (w) {
-      ticket.querySelector("[data-t-code]").textContent = cat.code + " · " + cat.name;
+      ticket.href = "workout.html?c=" + cat.id;
       ticket.querySelector("[data-t-name]").textContent = w.name;
-      ticket.querySelector("[data-t-meta]").textContent = w.time + " min · " + w.level;
+      ticket.querySelector("[data-t-cat]").textContent = cat.name;
+      ticket.querySelector("[data-t-time]").textContent = w.time + " min";
     }
   }
 

@@ -23,7 +23,7 @@
   border-bottom: 1px solid rgba(186, 230, 253, 0.6);
 }
 .app-header-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.app-header .brand img { width: 40px; height: 40px; border-radius: 12px; }
+.app-header .brand img { height: 46px; width: auto; }
 
 .date-chip { padding: 7px 13px; border-radius: 999px; background: #fff; border: 1px solid var(--sky-100); font-size: 0.82rem; font-weight: 650; color: var(--sky-700); box-shadow: var(--shadow-1); white-space: nowrap; }
 

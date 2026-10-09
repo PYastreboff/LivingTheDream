@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Living the Dream · Athletic Performance</title>
-  <meta name="description" content="Personal training, strength and strongman coaching. Achieve the Dream.">
+  <meta name="description" content="Personal training, strength and strongman coaching with Tristan. Achieve the Dream.">
   <meta name="theme-color" content="#ffffff">
   <script>document.documentElement.classList.add("js")</script>
-  <link rel="icon" href="assets/logo.png">
-  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <meta property="og:title" content="Living the Dream · Athletic Performance">
   <meta property="og:description" content="Personal training, strength and strongman coaching. Achieve the Dream.">
   <meta property="og:image" content="assets/hero.jpg">
@@ -21,12 +22,8 @@
 
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="Living the Dream home">
-        <img src="assets/logo.png" alt="" width="44" height="44">
-        <span class="brand-text">
-          <strong data-site-text="name">Living the Dream</strong>
-          <small data-site-text="tagline">Athletic Performance</small>
-        </span>
+      <a class="logo" href="#top" aria-label="Living the Dream home">
+        <img src="assets/logo.png" alt="Living the Dream — Athletic Performance" width="600" height="596">
       </a>
       <nav class="nav" aria-label="Main">
         <a href="#about">About</a>
@@ -53,40 +50,24 @@
 
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow"><span class="dot"></span>Personal training · Strength · Strongman</span>
-          <h1 class="display">Achieve the <span class="accent">Dream.</span></h1>
+          <p class="label">Personal training · Strength · Strongman</p>
+          <h1 class="display">Achieve<br><span class="nowrap">the <span class="hl">Dream.</span></span></h1>
           <p class="lead">Elevate your athletic performance with personal training built around you, your goals and your potential.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary btn-lg" data-site-link="booking" href="#contact">Book a session
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a class="btn btn-ghost btn-lg" href="workout.html">Today's workout</a>
+            <a class="btn btn-primary btn-lg" data-site-link="booking" href="#contact">Book a session</a>
+            <a class="text-link" href="workout.html">Today's workout <span aria-hidden="true">→</span></a>
           </div>
-          <ul class="hero-points">
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>1:1 coaching</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>Tailored programs</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>All levels welcome</li>
-          </ul>
+          <a class="today" href="workout.html" data-today-ticket>
+            <span class="today-label">On the machine today</span>
+            <span class="today-name"><strong data-t-name>Medley Madness</strong> — <span data-t-cat>Strongman</span>, <span data-t-time>30 min</span></span>
+          </a>
         </div>
 
-        <div class="hero-visual">
-          <div class="photo-card">
-            <img src="assets/hero.jpg" alt="Tristan flexing in the gym in front of atlas stones" width="1440" height="1798">
-          </div>
-          <a class="float-card ticket" href="workout.html" data-today-ticket>
-            <span class="ticket-label">Today's pick</span>
-            <span class="ticket-code" data-t-code>B1 · Full Body</span>
-            <strong data-t-name>The Daily Dream</strong>
-            <span class="ticket-meta" data-t-meta>30 min · Intermediate</span>
-          </a>
-          <div class="float-card chip-card">
-            <span class="pulse-dot"></span>
-            Scan · Pick · Train
-          </div>
-        </div>
+        <figure class="hero-photo">
+          <img src="assets/hero.jpg" alt="Tristan flexing in the gym in front of atlas stones" width="1440" height="1798">
+        </figure>
       </div>
     </section>
 
@@ -101,18 +82,15 @@
     <!-- ABOUT -->
     <section class="section" id="about">
       <div class="container about-grid">
-        <div class="about-head reveal">
-          <span class="kicker">About me</span>
-          <h2 class="h2">Coaching that's built on <span class="accent">real strength.</span></h2>
-        </div>
+        <figure class="about-photo reveal">
+          <img src="assets/about.jpg" alt="Tristan standing with his arms crossed in the gym" width="1440" height="1798" loading="lazy">
+        </figure>
         <div class="about-body reveal">
+          <p class="label">About</p>
+          <h2 class="h2">G'day, I'm Tristan.</h2>
           <p>I'm a personal trainer and competitive strongman athlete. I've spent years under the bar and on the competition floor, and I know what it takes to get stronger, fitter and more confident — because I've done it myself.</p>
           <p>Whether it's your first time in a gym or you're chasing a new PB, I'll build a plan around your body, your schedule and your goals, then coach you through every rep.</p>
-          <div class="stat-row">
-            <div class="stat"><strong>1:1</strong><span>Personalised coaching</span></div>
-            <div class="stat"><strong>60+</strong><span>Workouts in the machine</span></div>
-            <div class="stat"><strong>All</strong><span>Levels welcome</span></div>
-          </div>
+          <a class="text-link" data-site-link="instagram" href="#">Follow my training on Instagram <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -120,32 +98,39 @@
     <!-- TRAINING -->
     <section class="section section-tint" id="training">
       <div class="container">
-        <div class="section-head reveal">
-          <span class="kicker">Training</span>
-          <h2 class="h2">Pick your path.</h2>
-          <p class="muted">Every program is tailored to you. Not sure which fits? Send me a DM and we'll work it out together.</p>
+        <div class="training-head reveal">
+          <div>
+            <p class="label">Training</p>
+            <h2 class="h2">How we can<br>work together.</h2>
+          </div>
+          <p>Every program is tailored to you. Not sure which fits? Send me a DM and we'll work it out together.</p>
         </div>
-        <div class="cards">
-          <article class="card reveal">
-            <div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></div>
+        <ol class="offers">
+          <li class="offer reveal">
+            <span class="offer-num">01</span>
             <h3>1:1 Personal Training</h3>
-            <p>Fully coached sessions with a program built around your goals, technique and lifestyle.</p>
-            <ul class="ticks"><li>Goal setting & assessment</li><li>Hands-on technique coaching</li><li>Progress tracking</li></ul>
-          </article>
-          <article class="card card-feature reveal">
-            <div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 10.5 8 7a4 4 0 0 1 8 0l-.5 3.5"/><circle cx="12" cy="15" r="6"/></svg></div>
-            <span class="badge">Specialty</span>
-            <h3>Strength & Strongman</h3>
-            <p>Learn to lift, carry and press heavy things — safely. From your first farmer's walk to competition day.</p>
-            <ul class="ticks"><li>Barbell & implement technique</li><li>Comp prep & peaking</li><li>Grip, carries & stones</li></ul>
-          </article>
-          <article class="card reveal">
-            <div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12h4l2.5-6.5 5 13 2.5-6.5h5"/></svg></div>
+            <div>
+              <p>Fully coached sessions with a program built around your goals, technique and lifestyle.</p>
+              <p class="offer-tags">Goal setting · Technique coaching · Progress tracking</p>
+            </div>
+          </li>
+          <li class="offer reveal">
+            <span class="offer-num">02</span>
+            <h3>Strength &amp; Strongman</h3>
+            <div>
+              <p>Learn to lift, carry and press heavy things — safely. From your first farmer's walk to competition day.</p>
+              <p class="offer-tags">Barbell &amp; implements · Comp prep · Grip, carries &amp; stones</p>
+            </div>
+          </li>
+          <li class="offer reveal">
+            <span class="offer-num">03</span>
             <h3>Athletic Performance</h3>
-            <p>Get faster, more powerful and more resilient for your sport, with conditioning that carries over.</p>
-            <ul class="ticks"><li>Speed & power development</li><li>Conditioning for your sport</li><li>Injury-resilience work</li></ul>
-          </article>
-        </div>
+            <div>
+              <p>Get faster, more powerful and more resilient for your sport, with conditioning that carries over.</p>
+              <p class="offer-tags">Speed &amp; power · Sport conditioning · Injury resilience</p>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -153,17 +138,15 @@
     <section class="section" id="machine">
       <div class="container machine-grid">
         <div class="machine-copy reveal">
-          <span class="kicker">The Workout Vending Machine</span>
-          <h2 class="h2">Scan. Pick. <span class="accent">Train.</span></h2>
-          <p class="muted">No plan? No problem. Scan the QR code on the gym wall, choose what you want to train, and the machine serves up today's workout.</p>
+          <p class="label">The Workout Vending Machine</p>
+          <h2 class="h2">Scan. Pick. <span class="hl">Train.</span></h2>
+          <p>No plan? No problem. Scan the QR code on the gym wall, choose what you want to train, and the machine serves up today's workout.</p>
           <ol class="steps">
-            <li><span>1</span><div><strong>Scan the code</strong><p>Find the poster on the wall and point your phone camera at it.</p></div></li>
-            <li><span>2</span><div><strong>Pick a category</strong><p>Upper, lower, full body, core, conditioning or strongman.</p></div></li>
-            <li><span>3</span><div><strong>Get after it</strong><p>A fresh workout every day. Tick off each exercise as you go.</p></div></li>
+            <li><span><strong>Scan the code</strong> on the poster with your phone camera.</span></li>
+            <li><span><strong>Pick a category</strong> — upper, lower, full body, core, conditioning or strongman.</span></li>
+            <li><span><strong>Get after it.</strong> A fresh workout every day. Tick off each exercise as you go.</span></li>
           </ol>
-          <a class="btn btn-primary btn-lg" href="workout.html">Try the machine
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
+          <a class="btn btn-primary btn-lg" href="workout.html">Try the machine</a>
         </div>
         <div class="machine-mock reveal" aria-label="Workout categories">
           <div class="mock-display"><span>Select a workout</span><span class="blink">_</span></div>
@@ -174,36 +157,23 @@
     </section>
 
     <!-- CONTACT -->
-    <section class="section section-tint" id="contact">
-      <div class="container">
-        <div class="contact-card reveal">
-          <div class="contact-copy">
-            <span class="kicker">Get in touch</span>
-            <h2 class="h2">Ready to start living the dream?</h2>
-            <p>Send me a DM on Instagram to book your first session, ask a question, or follow along with my training.</p>
-            <a class="btn btn-white btn-lg" data-site-link="instagram" href="#">
-              <svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>
-              Message me on Instagram
-            </a>
-          </div>
-          <a class="ig-card" data-site-link="instagram" href="#" aria-label="Instagram profile">
-            <span class="ig-avatar"><img src="assets/profile.jpg" alt="" width="80" height="80"></span>
-            <span class="ig-meta">
-              <strong data-site-text="instagramHandle">@tristanwstrongman</strong>
-              <span>Personal Trainer · Strongman</span>
-            </span>
-            <span class="ig-follow">Follow</span>
-          </a>
-        </div>
+    <section class="contact" id="contact">
+      <div class="container contact-inner reveal">
+        <img class="contact-avatar" src="assets/profile.jpg" alt="" width="240" height="240" loading="lazy">
+        <h2 class="h2">Ready to start<br>living the dream?</h2>
+        <p>Send me a DM on Instagram to book your first session, ask a question, or follow along with my training.</p>
+        <a class="btn btn-white btn-lg" data-site-link="instagram" href="#">
+          <svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>
+          <span data-site-text="instagramHandle">@tristanwstrongman</span>
+        </a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <a class="brand" href="#top">
-        <img src="assets/logo.png" alt="" width="40" height="40">
-        <span class="brand-text"><strong data-site-text="name">Living the Dream</strong><small data-site-text="tagline">Athletic Performance</small></span>
+      <a class="logo logo-sm" href="#top" aria-label="Living the Dream home">
+        <img src="assets/logo.png" alt="" width="600" height="596" loading="lazy">
       </a>
       <nav class="footer-nav" aria-label="Footer">
         <a href="#about">About</a>
@@ -211,7 +181,7 @@
         <a href="workout.html">Workout Machine</a>
         <a data-site-link="instagram" href="#">Instagram</a>
       </nav>
-      <p class="fine">© <span data-year></span> <span data-site-text="name">Living the Dream</span></p>
+      <p class="fine">© <span data-year></span> <span data-site-text="name">Living the Dream</span> · Athletic Performance</p>
     </div>
   </footer>
 
