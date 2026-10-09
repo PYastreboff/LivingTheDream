@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poster · Workout Vending Machine</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    @page { size: A4 portrait; margin: 0; }
+
+    body.poster-page { background: #e8eff6; min-height: 100vh; }
+
+    .toolbar {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+      padding: 14px 20px; background: rgba(255,255,255,.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line); font-size: .9rem; color: var(--muted);
+    }
+    .toolbar code { background: var(--sky-50); color: var(--sky-700); padding: 2px 8px; border-radius: 6px; font-size: .85rem; }
+
+    .stage { display: flex; justify-content: center; padding: 32px 16px 60px; }
+    .sheet-holder { width: calc(210mm * var(--s, 1)); height: calc(297mm * var(--s, 1)); }
+
+    .sheet {
+      width: 210mm; height: 297mm; overflow: hidden; position: relative;
+      background: #fff; transform: scale(var(--s, 1)); transform-origin: top left;
+      box-shadow: 0 30px 80px -30px rgba(2,132,199,.45);
+      display: flex; flex-direction: column;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+
+    .p-top {
+      position: relative; height: 140mm; padding: 15mm 16mm 0; color: #fff; overflow: hidden;
+      background: linear-gradient(150deg, var(--sky-400) 0%, var(--sky-500) 45%, var(--sky-700) 100%);
+    }
+    .p-top::before, .p-top::after { content: ""; position: absolute; border-radius: 50%; border: 14mm solid rgba(255,255,255,.08); }
+    .p-top::before { width: 110mm; height: 110mm; right: -38mm; top: -46mm; }
+    .p-top::after { width: 70mm; height: 70mm; left: -30mm; bottom: -20mm; }
+
+    .p-brand { position: relative; display: flex; align-items: center; gap: 4mm; }
+    .p-brand img { width: 16mm; height: 16mm; border-radius: 4mm; box-shadow: 0 2mm 5mm rgba(0,0,0,.2); }
+    .p-brand strong { display: block; font-family: var(--font-display); font-stretch: 115%; font-weight: 800; font-size: 6mm; letter-spacing: -.02em; line-height: 1.1; }
+    .p-brand small { font-size: 3.2mm; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+
+    .p-title {
+      position: relative; margin: 10mm 0 0; font-family: var(--font-display); font-stretch: 125%;
+      font-weight: 900; text-transform: uppercase; line-height: .86; letter-spacing: -.03em; font-size: 19mm;
+    }
+    .p-title span { display: block; }
+    .p-title span:nth-child(2) { color: #06213a; }
+
+    .p-qr-wrap { position: relative; margin: -34mm auto 0; z-index: 2; width: 102mm; }
+    .p-qr {
+      padding: 7mm; border-radius: 9mm; background: #fff;
+      box-shadow: 0 6mm 16mm -6mm rgba(2,132,199,.55), 0 0 0 1.2mm var(--sky-100);
+    }
+    .p-qr svg { display: block; width: 100%; height: auto; }
+    .p-scan {
+      position: absolute; top: -5mm; left: 50%; transform: translateX(-50%);
+      padding: 2mm 6mm; border-radius: 99mm; background: #06213a; color: var(--sky-300);
+      font-family: ui-monospace, "SF Mono", Menlo, monospace; font-weight: 700; font-size: 3.6mm; letter-spacing: .2em; text-transform: uppercase; white-space: nowrap;
+    }
+
+    .p-body { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8mm 16mm 0; text-align: center; }
+    .p-tag { font-family: var(--font-display); font-stretch: 115%; font-weight: 850; font-size: 11mm; letter-spacing: -.035em; line-height: 1; margin: 0; color: var(--ink); }
+    .p-sub { margin: 3mm 0 0; font-size: 4.2mm; color: var(--muted); }
+
+    .p-cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; width: 100%; margin-top: 8mm; }
+    .p-cat { display: flex; align-items: center; gap: 2.6mm; padding: 3mm 3.4mm; border-radius: 4mm; background: var(--sky-50); border: .3mm solid var(--sky-100); text-align: left; }
+    .p-cat .icon { width: 6mm; height: 6mm; color: var(--sky-600); }
+    .p-cat b { font-size: 3.7mm; font-weight: 650; color: var(--ink); flex: 1; }
+    .p-cat em { font-style: normal; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 2.8mm; font-weight: 700; color: var(--sky-700); }
+
+    .p-foot {
+      display: flex; align-items: center; justify-content: space-between; gap: 6mm;
+      margin-top: auto; padding: 6mm 16mm; background: #06213a; color: #fff; font-size: 3.6mm;
+    }
+    .p-foot strong { font-family: var(--font-display); font-stretch: 115%; font-weight: 800; font-size: 4.6mm; }
+    .p-foot span { color: var(--sky-300); font-weight: 600; }
+
+    @media print {
+      body.poster-page { background: #fff; }
+      .toolbar { display: none; }
+      .stage { padding: 0; display: block; }
+      .sheet-holder { width: 210mm; height: 297mm; }
+      .sheet { transform: none; box-shadow: none; }
+    }
+  </style>
+</head>
+<body class="poster-page">
+
+  <div class="toolbar">
+    <span>QR code points to <code id="qr-url"></code></span>
+    <button class="btn btn-primary btn-sm" type="button" onclick="window.print()">Print poster</button>
+  </div>
+
+  <div class="stage">
+    <div class="sheet-holder">
+      <div class="sheet" id="sheet">
+        <div class="p-top">
+          <div class="p-brand">
+            <img src="assets/logo.png" alt="">
+            <div><strong data-site-text="name">Living the Dream</strong><small data-site-text="tagline">Athletic Performance</small></div>
+          </div>
+          <h1 class="p-title"><span>Workout</span><span>Vending</span><span>Machine</span></h1>
+        </div>
+
+        <div class="p-qr-wrap">
+          <span class="p-scan">Scan me</span>
+          <div class="p-qr" id="qr"></div>
+        </div>
+
+        <div class="p-body">
+          <p class="p-tag">Scan. Pick. Train.</p>
+          <p class="p-sub">Choose what you want to train and get a fresh workout every day.</p>
+          <div class="p-cats" id="cats"></div>
+        </div>
+
+        <div class="p-foot">
+          <strong>New workouts drop daily</strong>
+          <span id="foot-url"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/workouts.js"></script>
+  <script src="js/vend.js"></script>
+  <script src="js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+  <script>
+    (function () {
+      const base = (window.SITE && window.SITE.siteUrl) ? window.SITE.siteUrl.replace(/\/+$/, "") + "/" : window.location.href;
+      const url = new URL("workout.html", base).toString();
+      document.getElementById("qr-url").textContent = url;
+      document.getElementById("foot-url").textContent = url.replace(/^https?:\/\//, "").replace(/\/workout\.html$/, "");
+
+      if (window.qrcode) {
+        const qr = qrcode(0, "M");
+        qr.addData(url);
+        qr.make();
+        const n = qr.getModuleCount();
+        let path = "";
+        for (let r = 0; r < n; r++) {
+          for (let c = 0; c < n; c++) {
+            if (qr.isDark(r, c)) path += "M" + c + " " + r + "h1v1h-1z";
+          }
+        }
+        document.getElementById("qr").innerHTML =
+          '<svg viewBox="0 0 ' + n + " " + n + '" shape-rendering="crispEdges" role="img" aria-label="QR code"><path fill="#06213a" d="' + path + '"/></svg>';
+      }
+
+      document.getElementById("cats").innerHTML = (window.CATEGORIES || []).map((c) =>
+        '<div class="p-cat">' + window.Vend.icon(c.icon) + "<b>" + c.name + "</b><em>" + c.code + "</em></div>"
+      ).join("");
+
+      const holder = document.querySelector(".sheet-holder");
+      const sheet = document.getElementById("sheet");
+      function fit() {
+        const mm = sheet.offsetWidth / 210;
+        const avail = Math.min(window.innerWidth - 32, 820);
+        const s = Math.min(1, avail / (210 * mm));
+        holder.style.setProperty("--s", s);
+        sheet.style.setProperty("--s", s);
+      }
+      fit();
+      window.addEventListener("resize", fit);
+    })();
+  </script>
+</body>
+</html>

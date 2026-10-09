@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Workout Vending Machine · Living the Dream</title>
+  <meta name="description" content="Pick what you want to train and get today's workout.">
+  <meta name="theme-color" content="#f0f9ff">
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/workout.css">
+</head>
+<body class="app">
+
+  <header class="app-header">
+    <div class="app-wrap app-header-inner">
+      <a class="brand" href="index.html" aria-label="Living the Dream home">
+        <img src="assets/logo.png" alt="" width="40" height="40">
+        <span class="brand-text">
+          <strong data-site-text="name">Living the Dream</strong>
+          <small>Workout Machine</small>
+        </span>
+      </a>
+      <span class="date-chip" id="today-date"></span>
+    </div>
+  </header>
+
+  <main class="app-wrap">
+
+    <!-- MACHINE -->
+    <section class="view" id="machine-view">
+      <div class="intro">
+        <h1 class="app-title">What are we <span class="accent">training</span> today?</h1>
+        <p class="muted">Pick a category and the machine will serve up today's workout.</p>
+      </div>
+
+      <div class="vm" id="vm">
+        <div class="vm-head">
+          <span class="vm-logo">Workout<br>Vending Machine</span>
+          <span class="vm-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
+        <div class="vm-display" aria-live="polite">
+          <span id="vm-text">Select a workout</span><span class="blink">_</span>
+        </div>
+        <div class="vm-window" id="vm-slots" role="group" aria-label="Workout categories"></div>
+        <div class="vm-base">
+          <div class="vm-tray" id="vm-tray" aria-hidden="true">
+            <div class="vm-item" id="vm-item"></div>
+            <span class="vm-flap"></span>
+          </div>
+        </div>
+      </div>
+
+      <p class="hint">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        Fresh workouts drop every day at midnight.
+      </p>
+    </section>
+
+    <!-- RESULT -->
+    <section class="view" id="result-view" hidden>
+      <div class="result-bar">
+        <button class="icon-btn" id="back-btn" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+          Machine
+        </button>
+        <button class="icon-btn" id="share-btn" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
+          Share
+        </button>
+      </div>
+
+      <article class="workout" id="workout"></article>
+
+      <div class="next-up">
+        <div class="countdown">
+          <span>Next workout drops in</span>
+          <strong id="countdown">--</strong>
+        </div>
+        <button class="btn btn-ghost btn-block" id="another-btn" type="button">Pick another category</button>
+      </div>
+
+      <a class="promo" href="index.html#enquire">
+        <div>
+          <strong>Want a plan built just for you?</strong>
+          <span>Book a 1:1 session and let's chase your goals together.</span>
+        </div>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </section>
+
+    <p class="app-foot">Listen to your body and train within your limits. If you're unsure about a movement, ask a coach.</p>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/workouts.js"></script>
+  <script src="js/vend.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/workout-app.js"></script>
+</body>
+</html>
