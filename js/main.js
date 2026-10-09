@@ -2,16 +2,21 @@
   const S = window.SITE || {};
 
   const links = {
-    email: S.email ? "mailto:" + S.email : "",
-    phone: S.phone ? "tel:" + S.phone.replace(/[^\d+]/g, "") : "",
     instagram: S.instagram || "",
-    booking: S.bookingUrl || "#enquire"
+    booking: S.bookingUrl || S.instagram || ""
   };
 
   document.querySelectorAll("[data-site-link]").forEach((el) => {
     const href = links[el.dataset.siteLink];
-    if (href) el.setAttribute("href", href);
-    else el.hidden = true;
+    if (!href) {
+      el.hidden = true;
+      return;
+    }
+    el.setAttribute("href", href);
+    if (/^https?:/.test(href)) {
+      el.setAttribute("target", "_blank");
+      el.setAttribute("rel", "noopener");
+    }
   });
 
   document.querySelectorAll("[data-site-text]").forEach((el) => {
@@ -56,31 +61,6 @@
     reveals.forEach((el) => io.observe(el));
   } else {
     reveals.forEach((el) => el.classList.add("in"));
-  }
-
-  /* Enquiry form — opens the visitor's email app with everything filled in */
-  const form = document.querySelector("#enquiry-form");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-      const name = (data.get("name") || "").toString().trim();
-      const lines = [
-        "Name: " + name,
-        "Email: " + (data.get("email") || ""),
-        "Phone: " + (data.get("phone") || ""),
-        "Interested in: " + (data.get("interest") || ""),
-        "",
-        (data.get("message") || "").toString()
-      ];
-      const subject = "Training enquiry" + (name ? " from " + name : "");
-      window.location.href =
-        "mailto:" + (S.email || "") +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(lines.join("\n"));
-      const note = form.querySelector(".form-note");
-      if (note) note.textContent = "Opening your email app… if nothing happens, email " + (S.email || "us") + " directly.";
-    });
   }
 
   /* Home page: preview of today's pick from the machine */

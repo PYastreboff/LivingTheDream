@@ -139,7 +139,7 @@
       const base = (window.SITE && window.SITE.siteUrl) ? window.SITE.siteUrl.replace(/\/+$/, "") + "/" : window.location.href;
       const url = new URL("workout.html", base).toString();
       document.getElementById("qr-url").textContent = url;
-      document.getElementById("foot-url").textContent = url.replace(/^https?:\/\//, "").replace(/\/workout\.html$/, "");
+      document.getElementById("foot-url").textContent = "www.livingthedreamathleticperformance.com";
 
       if (window.qrcode) {
         const qr = qrcode(0, "M");
