@@ -1,3 +1,5 @@
+/** @OnlyCurrentDoc */
+
 /**
  * LIVING THE DREAM — Google Sheet backend (free)
  * ==========================================================================

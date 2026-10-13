@@ -21,7 +21,7 @@ window.SITE = {
   // The Google Apps Script web app URL (see google-apps-script/Code.gs for setup).
   // This saves vending machine leads + contact form messages to your Google Sheet,
   // and lets you edit the workouts from the sheet. Leave "" until it's set up.
-  googleScriptUrl: "https://script.google.com/macros/s/AKfycbz2VyKbsZWRYmdEj0yZtRT7XOlGgTYaCdh4N8dRLnHklgxbWOyWACFA1gzfwbKOzl4w/exec",
+  googleScriptUrl: "https://script.google.com/macros/s/AKfycbxxCTatGLnyvKyaKT5FHFz38bUBSRSFH6FCsccdSx0h3xdbst3Ivy_kDPvV_qhLgDh4/exec",
 
   // Client testimonials shown on the home page. Delete all of them to hide the section.
   testimonials: [
