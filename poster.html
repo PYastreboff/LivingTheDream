@@ -144,7 +144,7 @@
 
         <div class="p-foot">
           <strong>One free workout a day</strong>
-          <span id="foot-url"></span>
+          <span id="foot-url">www.livingthedreamathleticperformance.com</span>
         </div>
       </div>
     </div>
@@ -162,9 +162,7 @@
       const url = new URL("workout.html", base).toString();
       document.getElementById("qr-url").textContent = url;
       const S = window.SITE || {};
-      document.getElementById("foot-url").textContent = S.siteUrl
-        ? S.siteUrl.replace(/^https?:\/\//, "").replace(/\/+$/, "")
-        : (S.instagramHandle || "");
+      document.getElementById("foot-url").textContent = "www.livingthedreamathleticperformance.com";
 
       if (window.qrcode) {
         const qr = qrcode(0, "M");

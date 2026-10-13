@@ -16,7 +16,7 @@ window.SITE = {
 
   // Your live website address. Used for the QR code on the printable poster.
   // Leave "" to automatically use whatever address the poster page is opened from.
-  siteUrl: "https://www.livingthedreamathleticperformance.com",
+  siteUrl: "https://www.livingthedreamathleticperformance.com/workout.html",
 
   // The Google Apps Script web app URL (see google-apps-script/Code.gs for setup).
   // This saves vending machine leads + contact form messages to your Google Sheet,
