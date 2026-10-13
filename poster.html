@@ -14,7 +14,17 @@
   <style>
     @page { size: A4 portrait; margin: 0; }
 
-    body.poster-page { background: #e8eff6; min-height: 100vh; }
+    /* Anytime Fitness purple — tweak these if the gym gives you exact brand colours */
+    :root {
+      --af: #5f259f;
+      --af-dark: #3a1263;
+      --af-deep: #24093f;
+      --af-light: #f4eefb;
+      --af-line: #e4d6f3;
+      --af-lilac: #cdb3ee;
+    }
+
+    body.poster-page { background: #ece6f3; min-height: 100vh; }
 
     .toolbar {
       position: sticky; top: 0; z-index: 10;
@@ -30,61 +40,70 @@
     .sheet {
       width: 210mm; height: 297mm; overflow: hidden; position: relative;
       background: #fff; transform: scale(var(--s, 1)); transform-origin: top left;
-      box-shadow: 0 30px 80px -30px rgba(2,132,199,.45);
+      box-shadow: 0 30px 80px -30px rgba(58,18,99,.5);
       display: flex; flex-direction: column;
       -webkit-print-color-adjust: exact; print-color-adjust: exact;
     }
 
     .p-top {
-      position: relative; height: 140mm; padding: 15mm 16mm 0; color: #fff; overflow: hidden;
-      background: linear-gradient(150deg, var(--sky-400) 0%, var(--sky-500) 45%, var(--sky-700) 100%);
+      position: relative; height: 132mm; padding: 13mm 16mm 0; color: #fff; overflow: hidden;
+      background: linear-gradient(150deg, #7a3bbf 0%, var(--af) 45%, var(--af-dark) 100%);
     }
-    .p-top::before, .p-top::after { content: ""; position: absolute; border-radius: 50%; border: 14mm solid rgba(255,255,255,.08); }
+    .p-top::before, .p-top::after { content: ""; position: absolute; border-radius: 50%; border: 14mm solid rgba(255,255,255,.07); }
     .p-top::before { width: 110mm; height: 110mm; right: -38mm; top: -46mm; }
     .p-top::after { width: 70mm; height: 70mm; left: -30mm; bottom: -20mm; }
 
-    .p-brand { position: relative; display: flex; align-items: center; gap: 4mm; }
-    .p-brand img { height: 24mm; width: auto; }
+    .p-brand { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 8mm; }
+    .p-brand .p-logo { height: 24mm; width: auto; }
+    .p-af { display: flex; align-items: center; justify-content: flex-end; height: 24mm; max-width: 70mm; }
+    .p-af img { max-height: 16mm; max-width: 70mm; width: auto; }
+    .p-af-placeholder {
+      display: grid; place-items: center; height: 16mm; padding: 0 5mm; border: .5mm dashed rgba(255,255,255,.6); border-radius: 3mm;
+      font-size: 3.2mm; font-weight: 600; text-align: center; line-height: 1.25; color: rgba(255,255,255,.85);
+    }
 
     .p-title {
-      position: relative; margin: 6mm 0 0; font-family: var(--font-display); font-stretch: 125%;
+      position: relative; margin: 7mm 0 0; font-family: var(--font-display); font-stretch: 125%;
       font-weight: 900; text-transform: uppercase; line-height: .86; letter-spacing: -.03em; font-size: 19mm;
     }
     .p-title span { display: block; }
-    .p-title span:nth-child(2) { color: #06213a; }
+    .p-title span:nth-child(2) { color: var(--af-lilac); }
 
-    .p-qr-wrap { position: relative; margin: -34mm auto 0; z-index: 2; width: 102mm; }
+    .p-qr-wrap { position: relative; margin: -30mm auto 0; z-index: 2; width: 96mm; }
     .p-qr {
       padding: 7mm; border-radius: 9mm; background: #fff;
-      box-shadow: 0 6mm 16mm -6mm rgba(2,132,199,.55), 0 0 0 1.2mm var(--sky-100);
+      box-shadow: 0 6mm 16mm -6mm rgba(58,18,99,.6), 0 0 0 1.2mm var(--af-line);
     }
     .p-qr svg { display: block; width: 100%; height: auto; }
     .p-scan {
       position: absolute; top: -5mm; left: 50%; transform: translateX(-50%);
-      padding: 2mm 6mm; border-radius: 99mm; background: #06213a; color: var(--sky-300);
+      padding: 2mm 6mm; border-radius: 99mm; background: var(--af-deep); color: var(--af-lilac);
       font-family: ui-monospace, "SF Mono", Menlo, monospace; font-weight: 700; font-size: 3.6mm; letter-spacing: .2em; text-transform: uppercase; white-space: nowrap;
     }
 
-    .p-body { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8mm 16mm 0; text-align: center; }
-    .p-tag { font-family: var(--font-display); font-stretch: 115%; font-weight: 850; font-size: 11mm; letter-spacing: -.035em; line-height: 1; margin: 0; color: var(--ink); }
-    .p-sub { margin: 3mm 0 0; font-size: 4.2mm; color: var(--muted); }
+    .p-body { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8mm 16mm 8mm; text-align: center; }
+    .p-tag { font-family: var(--font-display); font-stretch: 115%; font-weight: 850; font-size: 11mm; letter-spacing: -.035em; line-height: 1; margin: 0; color: var(--af-deep); }
+    .p-sub { margin: 3mm 0 0; font-size: 4.2mm; color: #5b5168; max-width: 150mm; }
 
-    .p-cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; width: 100%; margin-top: 8mm; }
-    .p-cat { display: flex; align-items: center; gap: 2.6mm; padding: 3mm 3.4mm; border-radius: 4mm; background: var(--sky-50); border: .3mm solid var(--sky-100); text-align: left; }
-    .p-cat .icon { width: 6mm; height: 6mm; color: var(--sky-600); }
-    .p-cat b { font-size: 3.7mm; font-weight: 650; color: var(--ink); flex: 1; }
-    .p-cat em { font-style: normal; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 2.8mm; font-weight: 700; color: var(--sky-700); }
+    .p-cats { display: flex; flex-wrap: wrap; justify-content: center; gap: 3mm; width: 100%; margin-top: 7mm; }
+    .p-cat { flex: 0 0 56mm; display: flex; align-items: center; gap: 2.6mm; padding: 3mm 3.4mm; border-radius: 4mm; background: var(--af-light); border: .3mm solid var(--af-line); text-align: left; }
+    .p-cat .icon { width: 6mm; height: 6mm; color: var(--af); }
+    .p-cat b { font-size: 3.7mm; font-weight: 650; color: var(--af-deep); flex: 1; }
+    .p-cat em { font-style: normal; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 2.8mm; font-weight: 700; color: var(--af); }
 
     .p-foot {
       display: flex; align-items: center; justify-content: space-between; gap: 6mm;
-      margin-top: auto; padding: 6mm 16mm; background: #06213a; color: #fff; font-size: 3.6mm;
+      margin-top: auto; padding: 6mm 16mm; background: var(--af-deep); color: #fff; font-size: 3.6mm;
     }
     .p-foot strong { font-family: var(--font-display); font-stretch: 115%; font-weight: 800; font-size: 4.6mm; }
-    .p-foot span { color: var(--sky-300); font-weight: 600; }
+    .p-foot span { color: var(--af-lilac); font-weight: 600; }
+
+    .toolbar code { background: var(--af-light); color: var(--af); }
+    .toolbar .btn-primary { background: var(--af); }
 
     @media print {
       body.poster-page { background: #fff; }
-      .toolbar { display: none; }
+      .toolbar, .p-af-placeholder { display: none; }
       .stage { padding: 0; display: block; }
       .sheet-holder { width: 210mm; height: 297mm; }
       .sheet { transform: none; box-shadow: none; }
@@ -103,7 +122,11 @@
       <div class="sheet" id="sheet">
         <div class="p-top">
           <div class="p-brand">
-            <img src="assets/logo-white.png" alt="Living the Dream — Athletic Performance">
+            <img class="p-logo" src="assets/logo-white.png" alt="Living the Dream — Athletic Performance">
+            <div class="p-af">
+              <img src="assets/anytime-fitness-logo.png" alt="Anytime Fitness"
+                   onerror="this.outerHTML='<span class=&quot;p-af-placeholder&quot;>Anytime Fitness logo<br>assets/anytime-fitness-logo.png</span>'">
+            </div>
           </div>
           <h1 class="p-title"><span>Workout</span><span>Vending</span><span>Machine</span></h1>
         </div>
@@ -115,12 +138,12 @@
 
         <div class="p-body">
           <p class="p-tag">Scan. Pick. Train.</p>
-          <p class="p-sub">Choose what you want to train and get a fresh workout every day.</p>
+          <p class="p-sub">Pick what you want to train and the machine vends you a random workout. One free roll a day — make it count.</p>
           <div class="p-cats" id="cats"></div>
         </div>
 
         <div class="p-foot">
-          <strong>New workouts drop daily</strong>
+          <strong>One free workout a day</strong>
           <span id="foot-url"></span>
         </div>
       </div>
@@ -134,10 +157,14 @@
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
   <script>
     (function () {
-      const base = (window.SITE && window.SITE.siteUrl) ? window.SITE.siteUrl.replace(/\/+$/, "") + "/" : window.location.href;
+      const site = ((window.SITE && window.SITE.siteUrl) || "").trim();
+      const base = site ? (/^https?:\/\//.test(site) ? site : "https://" + site).replace(/\/+$/, "") + "/" : window.location.href;
       const url = new URL("workout.html", base).toString();
       document.getElementById("qr-url").textContent = url;
-      document.getElementById("foot-url").textContent = "www.livingthedreamathleticperformance.com";
+      const S = window.SITE || {};
+      document.getElementById("foot-url").textContent = S.siteUrl
+        ? S.siteUrl.replace(/^https?:\/\//, "").replace(/\/+$/, "")
+        : (S.instagramHandle || "");
 
       if (window.qrcode) {
         const qr = qrcode(0, "M");
@@ -151,7 +178,7 @@
           }
         }
         document.getElementById("qr").innerHTML =
-          '<svg viewBox="0 0 ' + n + " " + n + '" shape-rendering="crispEdges" role="img" aria-label="QR code"><path fill="#06213a" d="' + path + '"/></svg>';
+          '<svg viewBox="0 0 ' + n + " " + n + '" shape-rendering="crispEdges" role="img" aria-label="QR code"><path fill="#24093f" d="' + path + '"/></svg>';
       }
 
       document.getElementById("cats").innerHTML = (window.CATEGORIES || []).map((c) =>

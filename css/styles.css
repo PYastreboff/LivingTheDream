@@ -245,19 +245,6 @@ h3 { font-size: 1.75rem; font-weight: 850; line-height: 1; letter-spacing: 0; ma
 
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
 
-.today {
-  display: grid;
-  gap: 2px;
-  margin-top: 44px;
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
-  max-width: 30em;
-}
-.today-label { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-.today-name { color: var(--ink-2); }
-.today strong { color: var(--ink); }
-.today:hover strong { color: var(--sky-700); text-decoration: underline; text-underline-offset: 3px; }
-
 .hero-photo { position: relative; }
 .hero-photo img { width: 100%; height: auto; aspect-ratio: 4 / 4.8; object-fit: cover; object-position: 50% 15%; border-radius: 10px; }
 
@@ -354,17 +341,64 @@ h3 { font-size: 1.75rem; font-weight: 850; line-height: 1; letter-spacing: 0; ma
 }
 .mini-slot:hover { transform: translateY(-2px); }
 .mini-slot .icon { width: 28px; height: 28px; color: var(--sky-600); }
+.mini-slot.mini-wide { grid-column: 1 / -1; flex-direction: row; align-items: center; }
+.mini-wide .icon { color: var(--ink); }
 .mini-slot em { position: absolute; top: 12px; right: 12px; font-style: normal; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.72rem; font-weight: 700; color: var(--sky-700); background: var(--sky-50); padding: 3px 7px; border-radius: 5px; }
 
 .mock-tray { margin-top: 14px; height: 50px; border-radius: 12px; background: #06213a; display: grid; place-items: center; }
 .mock-tray span { width: 60%; height: 6px; border-radius: 6px; background: rgba(125, 211, 252, 0.25); }
 
+/* Reviews */
+.reviews-head { margin-bottom: 48px; }
+.reviews-head .h2 { margin: 0; }
+.reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px 32px; }
+.review { margin: 0; padding-top: 22px; border-top: 1.5px solid var(--ink); display: flex; flex-direction: column; }
+.review blockquote { margin: 0 0 22px; font-size: 1.1rem; line-height: 1.55; color: var(--ink); }
+.review blockquote::before { content: "“"; display: block; height: 0.55em; font-family: var(--font-display); font-weight: 900; font-size: 3.4rem; line-height: 1; color: var(--sky-500); }
+.review figcaption { margin-top: auto; display: grid; gap: 2px; }
+.review figcaption span { font-size: 0.88rem; color: var(--muted); }
+
 /* Contact */
-.contact { background: var(--sky-600); color: #fff; padding: clamp(72px, 10vw, 120px) 0; text-align: center; }
-.contact-inner { display: grid; justify-items: center; }
-.contact-avatar { width: 96px; height: 96px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; margin-bottom: 26px; }
+.contact { background: var(--sky-600); color: #fff; padding: clamp(72px, 10vw, 120px) 0; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 6vw, 96px); align-items: center; }
+.contact-avatar { width: 88px; height: 88px; border-radius: 50%; border: 3px solid #fff; object-fit: cover; margin-bottom: 24px; }
 .contact .h2 { color: #fff; }
-.contact p { margin: 0 0 32px; max-width: 32em; font-size: 1.1rem; color: rgba(255, 255, 255, 0.88); }
+.contact-copy > p { margin: 0 0 30px; max-width: 30em; font-size: 1.1rem; color: rgba(255, 255, 255, 0.88); }
+.contact-list { list-style: none; padding: 0; margin: 0; max-width: 30em; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+.contact-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(255, 255, 255, 0.3); }
+.contact-list span { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); }
+.contact-list a { font-weight: 650; font-size: 1.05rem; overflow-wrap: anywhere; text-align: right; }
+.contact-list a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.contact-form { padding: clamp(22px, 4vw, 34px); border-radius: 14px; background: #fff; color: var(--ink); box-shadow: 0 30px 60px -30px rgba(6, 33, 58, 0.6); }
+.contact-form h3 { margin: 0 0 20px; font-size: 1.6rem; }
+.contact-form .field { margin-bottom: 14px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+.form-status { margin: 12px 0 0; min-height: 1.4em; font-size: 0.92rem; font-weight: 550; color: var(--muted); }
+.form-status.is-error { color: #b91c1c; }
+.form-status.is-success { color: #047857; }
+.form-status a { text-decoration: underline; }
+
+/* Form fields */
+.field { display: grid; gap: 6px; }
+.field > span { font-size: 0.84rem; font-weight: 650; color: var(--ink-2); }
+.field em { font-style: normal; font-weight: 500; color: var(--muted); }
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field textarea { resize: vertical; min-height: 110px; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--sky-500); box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15); }
+.field input::placeholder { color: #9aa8b8; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 0.88rem; color: var(--ink-2); cursor: pointer; }
+.check input { flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--sky-600); }
 
 /* ---------- Footer ---------- */
 
@@ -385,7 +419,7 @@ h3 { font-size: 1.75rem; font-weight: 850; line-height: 1; letter-spacing: 0; ma
 @media (max-width: 960px) {
   .nav, .header-cta { display: none; }
   .nav-toggle { display: block; }
-  .hero-grid, .about-grid, .machine-grid, .training-head { grid-template-columns: 1fr; }
+  .hero-grid, .about-grid, .machine-grid, .training-head, .contact-grid { grid-template-columns: 1fr; }
   .hero-photo { max-width: 560px; }
   .about-photo { max-width: 480px; }
   .training-head > p { justify-self: start; }
@@ -406,6 +440,7 @@ h3 { font-size: 1.75rem; font-weight: 850; line-height: 1; letter-spacing: 0; ma
   .offer { grid-template-columns: 1fr; gap: 10px; padding: 26px 0; }
   .offer > div { grid-column: auto; }
   .footer-nav { margin-left: 0; gap: 18px; }
+  .field-row { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

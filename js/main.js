@@ -1,15 +1,18 @@
 (function () {
   const S = window.SITE || {};
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   const links = {
     instagram: S.instagram || "",
-    booking: S.bookingUrl || S.instagram || ""
+    booking: S.bookingUrl || "#contact",
+    email: S.email ? "mailto:" + S.email : "",
+    phone: S.phone ? "tel:" + S.phone.replace(/[^\d+]/g, "") : ""
   };
 
   document.querySelectorAll("[data-site-link]").forEach((el) => {
     const href = links[el.dataset.siteLink];
     if (!href) {
-      el.hidden = true;
+      (el.closest("[data-link-wrap]") || el).hidden = true;
       return;
     }
     el.setAttribute("href", href);
@@ -26,6 +29,23 @@
   });
 
   document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
+
+  /* Testimonials */
+  const reviews = (S.testimonials || []).filter((t) => t && t.quote);
+  const reviewsGrid = document.querySelector("[data-testimonials]");
+  if (reviewsGrid) {
+    if (reviews.length) {
+      reviewsGrid.innerHTML = reviews.map((t) =>
+        '<figure class="review reveal">' +
+          "<blockquote>" + esc(t.quote) + "</blockquote>" +
+          "<figcaption><strong>" + esc(t.name) + "</strong>" + (t.detail ? "<span>" + esc(t.detail) + "</span>" : "") + "</figcaption>" +
+        "</figure>"
+      ).join("");
+      reviewsGrid.closest("section").hidden = false;
+    } else {
+      document.querySelectorAll("[data-reviews-link]").forEach((a) => (a.hidden = true));
+    }
+  }
 
   /* Header + mobile menu */
   const header = document.querySelector(".site-header");
@@ -63,27 +83,62 @@
     reveals.forEach((el) => el.classList.add("in"));
   }
 
-  /* Home page: preview of today's pick from the machine */
-  const ticket = document.querySelector("[data-today-ticket]");
-  if (ticket && window.Vend && window.CATEGORIES) {
-    const cats = window.CATEGORIES;
-    const cat = cats[window.Vend.dayNumber() % cats.length];
-    const w = window.Vend.pickToday(cat.id);
-    if (w) {
-      ticket.href = "workout.html?c=" + cat.id;
-      ticket.querySelector("[data-t-name]").textContent = w.name;
-      ticket.querySelector("[data-t-cat]").textContent = cat.name;
-      ticket.querySelector("[data-t-time]").textContent = w.time + " min";
-    }
-  }
-
+  /* Home page: preview of the machine */
   document.querySelectorAll("[data-machine-preview]").forEach((grid) => {
     if (!window.CATEGORIES || !window.Vend) return;
     grid.innerHTML = window.CATEGORIES.map(
       (c) =>
-        '<a class="mini-slot" href="workout.html?c=' + c.id + '">' +
+        '<a class="mini-slot' + (c.random ? " mini-wide" : "") + '" href="workout.html">' +
         window.Vend.icon(c.icon) +
-        "<span>" + c.name + "</span><em>" + c.code + "</em></a>"
+        "<span>" + esc(c.name) + "</span><em>" + c.code + "</em></a>"
     ).join("");
   });
+
+  /* Contact form → Google Sheet (falls back to email, then Instagram) */
+  const form = document.getElementById("contact-form");
+  if (form) {
+    const status = document.getElementById("form-status");
+    const say = (html, type) => {
+      status.innerHTML = html;
+      status.className = "form-status" + (type ? " is-" + type : "");
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = form.elements;
+      const data = {
+        type: "enquiry",
+        name: f.name.value.trim(),
+        phone: f.phone.value.trim(),
+        email: f.email.value.trim(),
+        interest: f.interest.value,
+        message: f.message.value.trim()
+      };
+
+      if (!data.name) return say("Please add your name.", "error"), f.name.focus();
+      if (!data.phone && !data.email) return say("Please add a phone number or email so I can get back to you.", "error"), f.phone.focus();
+      if (data.email && !f.email.checkValidity()) return say("That email doesn't look right.", "error"), f.email.focus();
+      if (!data.message) return say("Please add a message.", "error"), f.message.focus();
+
+      if (S.googleScriptUrl && window.Vend) {
+        const btn = form.querySelector("button[type=submit]");
+        btn.disabled = true;
+        say("Sending…");
+        const ok = await window.Vend.send(data);
+        btn.disabled = false;
+        if (ok) {
+          form.reset();
+          return say("Thanks " + esc(data.name.split(" ")[0]) + "! Your message is in — I'll be in touch soon.", "success");
+        }
+      }
+
+      if (S.email) {
+        const body = data.message + "\n\n" + data.name + (data.phone ? "\n" + data.phone : "") + (data.email ? "\n" + data.email : "");
+        window.location.href = "mailto:" + S.email + "?subject=" + encodeURIComponent("Enquiry: " + data.interest) + "&body=" + encodeURIComponent(body);
+        return say("Opening your email app…");
+      }
+
+      say('Sorry, the form isn\'t connected yet. Please <a href="' + esc(S.instagram) + '" target="_blank" rel="noopener">DM me on Instagram</a> instead.', "error");
+    });
+  }
 })();

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Workout Vending Machine · Living the Dream</title>
-  <meta name="description" content="Pick what you want to train and get today's workout.">
+  <meta name="description" content="Pick what you want to train and the machine serves up a random workout. One roll per day.">
   <meta name="theme-color" content="#f0f9ff">
   <script>document.documentElement.classList.add("js")</script>
   <link rel="icon" href="favicon.ico" sizes="any">
@@ -37,7 +37,7 @@
     <section class="view" id="machine-view">
       <div class="intro">
         <h1 class="app-title">What are we <span class="accent">training</span> today?</h1>
-        <p class="muted">Pick a category and the machine will serve up today's workout.</p>
+        <p class="muted">Pick a category and the machine serves up a random workout. You get one roll a day — make it count.</p>
       </div>
 
       <div class="vm" id="vm">
@@ -57,10 +57,16 @@
         </div>
       </div>
 
-      <p class="hint">
+      <p class="hint" id="hint">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        Fresh workouts drop every day at midnight.
+        One free roll per day. Resets at midnight.
       </p>
+
+      <div class="locked" id="locked" hidden>
+        <strong>You've had your roll for today.</strong>
+        <span>Next roll unlocks in <b data-countdown>--</b></span>
+        <button class="btn btn-primary btn-block" id="view-today" type="button">View today's workout</button>
+      </div>
     </section>
 
     <!-- RESULT -->
@@ -70,26 +76,21 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
           Machine
         </button>
-        <button class="icon-btn" id="share-btn" type="button">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
-          Share
-        </button>
       </div>
 
       <article class="workout" id="workout"></article>
 
       <div class="next-up">
         <div class="countdown">
-          <span>Next workout drops in</span>
-          <strong id="countdown">--</strong>
+          <span>Next roll unlocks in</span>
+          <strong data-countdown>--</strong>
         </div>
-        <button class="btn btn-ghost btn-block" id="another-btn" type="button">Pick another category</button>
       </div>
 
-      <a class="promo" data-site-link="booking" href="index.html#contact">
+      <a class="promo" href="index.html#contact">
         <div>
           <strong>Want a plan built just for you?</strong>
-          <span>DM me on Instagram to book a 1:1 session.</span>
+          <span>Book a 1:1 session with Tristan.</span>
         </div>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
@@ -98,7 +99,25 @@
     <p class="app-foot">Listen to your body and train within your limits. If you're unsure about a movement, ask a coach.</p>
   </main>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="sheet-backdrop" id="lead-sheet" hidden>
+    <form class="lead-form" id="lead-form" aria-labelledby="lead-title">
+      <button class="sheet-close" id="lead-close" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <span class="lead-tag" id="lead-tag"></span>
+      <h2 id="lead-title">Unlock your workout</h2>
+      <p class="lead-intro">Pop your details in and the machine will vend your workout. You only need to do this once.</p>
+      <label class="field"><span>Name</span><input name="name" required autocomplete="name" placeholder="Your name"></label>
+      <label class="field"><span>Phone</span><input name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="04xx xxx xxx"></label>
+      <label class="field"><span>Email <em>(optional)</em></span><input name="email" type="email" autocomplete="email" placeholder="you@email.com"></label>
+      <label class="check">
+        <input type="checkbox" name="consent" required>
+        <span>I'm happy for Tristan to contact me about training.</span>
+      </label>
+      <button class="btn btn-primary btn-lg btn-block" type="submit">Vend my workout</button>
+      <p class="lead-fine">Your details only go to Tristan and are never shared.</p>
+    </form>
+  </div>
 
   <script src="js/config.js"></script>
   <script src="js/workouts.js"></script>

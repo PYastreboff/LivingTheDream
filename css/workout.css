@@ -150,6 +150,44 @@
 .slot.is-vending .slot-coil { animation: coil 0.35s linear infinite; background: repeating-linear-gradient(115deg, var(--sky-500) 0 3px, transparent 3px 8px); }
 .slot.is-vending .slot-icon { animation: dropOut 0.7s var(--ease) 0.45s forwards; }
 
+.slot-wide {
+  grid-column: 1 / -1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 14px;
+  align-items: center;
+  padding: 14px 14px 22px;
+  background: linear-gradient(120deg, #fff 40%, var(--sky-50));
+}
+.slot-wide .slot-icon { grid-row: 1 / 3; margin: 0; background: var(--ink); color: var(--sky-300); }
+.slot-wide .slot-name { align-self: end; }
+.slot-wide .slot-blurb { align-self: start; margin-top: 1px; }
+
+.is-locked .vm { filter: saturate(0.6); }
+.is-locked .slot:not(.is-picked) { opacity: 0.45; }
+.is-locked .slot:disabled { cursor: not-allowed; }
+.is-locked .slot.is-picked { opacity: 1; }
+.is-locked .vm-lights i { animation: none; }
+
+.locked {
+  margin: 18px auto 0;
+  max-width: 620px;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 20px;
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-1);
+  text-align: center;
+}
+.locked strong { font-size: 1.05rem; }
+.locked span { color: var(--muted); font-size: 0.92rem; margin-bottom: 10px; }
+.locked b { color: var(--sky-700); }
+
 @keyframes coil { to { background-position: 8px 0; } }
 @keyframes dropOut { 30% { transform: translateY(-4px) rotate(-6deg); } 100% { transform: translateY(70px) rotate(14deg); opacity: 0; } }
 
@@ -321,30 +359,53 @@
 
 .app-foot { margin: 32px auto 40px; max-width: 30em; text-align: center; font-size: 0.8rem; color: var(--muted); }
 
-.toast {
+/* ---------- Lead form ---------- */
+
+.sheet-backdrop {
   position: fixed;
-  left: 50%;
-  bottom: calc(24px + env(safe-area-inset-bottom));
-  z-index: 60;
-  max-width: calc(100% - 40px);
-  padding: 12px 20px;
-  border-radius: 999px;
-  background: var(--ink);
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.9rem;
-  box-shadow: var(--shadow-2);
-  transform: translate(-50%, 20px);
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(6, 33, 58, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s, transform 0.3s var(--ease);
-  overflow-wrap: anywhere;
+  transition: opacity 0.25s;
 }
-.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.sheet-backdrop.open { opacity: 1; }
+.lead-form {
+  position: relative;
+  width: min(480px, 100%);
+  max-height: 100dvh;
+  overflow-y: auto;
+  padding: 26px 22px calc(22px + env(safe-area-inset-bottom));
+  border-radius: 26px 26px 0 0;
+  background: #fff;
+  box-shadow: var(--shadow-2);
+  transform: translateY(40px);
+  transition: transform 0.35s var(--ease);
+}
+.sheet-backdrop.open .lead-form { transform: none; }
+.lead-form h2 { margin: 12px 0 6px; font-family: var(--font-display); font-stretch: 75%; font-weight: 900; font-size: 2rem; line-height: 1; text-transform: uppercase; }
+.lead-intro { margin: 0 0 18px; color: var(--muted); font-size: 0.94rem; }
+.lead-tag { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px 5px 8px; border-radius: 999px; background: var(--sky-50); color: var(--sky-700); font-size: 0.8rem; font-weight: 650; }
+.lead-tag .icon { width: 16px; height: 16px; }
+.lead-form .field { margin-bottom: 12px; }
+.lead-form .check { margin: 4px 0 18px; }
+.lead-fine { margin: 12px 0 0; text-align: center; font-size: 0.78rem; color: var(--muted); }
+.sheet-close { position: absolute; top: 14px; right: 14px; width: 38px; height: 38px; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--tint); cursor: pointer; }
+.sheet-close svg { width: 18px; height: 18px; fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; }
+
+@media (min-width: 640px) {
+  .sheet-backdrop { align-items: center; padding: 20px; }
+  .lead-form { border-radius: 26px; padding: 30px 30px 26px; }
+}
 
 @media (min-width: 640px) {
   .vm { padding: 20px; }
-  .vm-window { grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 12px; }
+  .vm-window { grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 12px; }
   .w-hero { padding: 32px; }
   .w-block, .next-up { padding: 22px; }
 }
