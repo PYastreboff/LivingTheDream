@@ -246,7 +246,7 @@ h3 { font-size: 1.75rem; font-weight: 850; line-height: 1; letter-spacing: 0; ma
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
 
 .hero-photo { position: relative; }
-.hero-photo img { width: 100%; height: auto; aspect-ratio: 4 / 4.8; object-fit: cover; object-position: 50% 15%; border-radius: 10px; }
+.hero-photo img { width: 100%; height: auto; aspect-ratio: 4 / 4.8; object-fit: cover; object-position: 50% 0%; border-radius: 10px; }
 
 /* ---------- Marquee ---------- */
 
@@ -349,8 +349,27 @@ h3 { font-size: 1.75rem; font-weight: 850; line-height: 1; letter-spacing: 0; ma
 .mock-tray span { width: 60%; height: 6px; border-radius: 6px; background: rgba(125, 211, 252, 0.25); }
 
 /* Reviews */
-.reviews-head { margin-bottom: 48px; }
+.reviews-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 28px 48px; margin-bottom: 48px; }
 .reviews-head .h2 { margin: 0; }
+.reviews-links { display: grid; justify-items: end; gap: 14px; }
+.google-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 18px 11px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  transition: border-color 0.2s, transform 0.2s var(--ease);
+}
+.google-badge:hover { border-color: var(--ink); transform: translateY(-1px); }
+.google-badge svg { width: 28px; height: 28px; flex: none; }
+.google-badge strong { display: block; font-size: 0.98rem; line-height: 1.2; }
+.google-badge small { display: block; font-size: 0.82rem; color: var(--muted); }
+.google-arrow { margin-left: 6px; font-weight: 700; }
+.review-source { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 0.82rem; font-weight: 600; color: var(--muted); }
+.review-source svg { width: 14px; height: 14px; }
+.review-source:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 .reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px 32px; }
 .review { margin: 0; padding-top: 22px; border-top: 1.5px solid var(--ink); display: flex; flex-direction: column; }
 .review blockquote { margin: 0 0 22px; font-size: 1.1rem; line-height: 1.55; color: var(--ink); }
@@ -407,7 +426,9 @@ h3 { font-size: 1.75rem; font-weight: 850; line-height: 1; letter-spacing: 0; ma
 .footer-nav { display: flex; gap: 24px; margin-left: auto; flex-wrap: wrap; }
 .footer-nav a { color: var(--ink-2); font-weight: 600; font-size: 0.92rem; }
 .footer-nav a:hover { color: var(--sky-700); }
-.fine { margin: 0; color: var(--muted); font-size: 0.85rem; width: 100%; padding-top: 20px; border-top: 1px solid var(--line); }
+.fine { margin: 0; color: var(--muted); font-size: 0.85rem; width: 100%; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; }
+.credit { color: var(--muted); }
+.credit:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------- Reveal ---------- */
 
@@ -423,6 +444,7 @@ h3 { font-size: 1.75rem; font-weight: 850; line-height: 1; letter-spacing: 0; ma
   .hero-photo { max-width: 560px; }
   .about-photo { max-width: 480px; }
   .training-head > p { justify-self: start; }
+  .reviews-links { justify-items: start; }
   .offer { grid-template-columns: 60px 1fr; }
   .offer > div { grid-column: 2; }
 }

@@ -23,22 +23,30 @@ window.SITE = {
   // and lets you edit the workouts from the sheet. Leave "" until it's set up.
   googleScriptUrl: "https://script.google.com/macros/s/AKfycbxxCTatGLnyvKyaKT5FHFz38bUBSRSFH6FCsccdSx0h3xdbst3Ivy_kDPvV_qhLgDh4/exec",
 
+  // Google reviews: one link opens the reviews, the other opens "Write a review".
+  googleReviews: "https://www.google.com/search?q=Living+the+Dream+Athletic+Performance#lrd=0xadc6d713fbbe736b:0xe8c08c20f0bcbb87,1,,,,",
+  googleWriteReview: "https://www.google.com/search?q=Living+the+Dream+Athletic+Performance#lrd=0xadc6d713fbbe736b:0xe8c08c20f0bcbb87,3,,,,",
+
   // Client testimonials shown on the home page. Delete all of them to hide the section.
+  // Add source: "google" to show a "Google review" link under the quote.
   testimonials: [
     {
-      quote: "Placeholder — replace this with a real quote from a client about training with Tristan.",
-      name: "Client name",
-      detail: "e.g. Lost 10kg in 12 weeks"
+      quote: "I've had a great experience with Tristan's personal training! I've seen improvements in my strength and performance in just a few short weeks! And he's answered all of my questions day and night! Would highly recommend.",
+      name: "Alex Priscolin",
+      detail: "",
+      source: "google"
     },
     {
-      quote: "Placeholder — another client quote goes here. Keep it to two or three sentences.",
-      name: "Client name",
-      detail: "e.g. First strongman comp"
+      quote: "Tristan is the best trainer ever! So friendly and encouraging that workouts feel fun whilst learning and growing so much! Highly recommend!!",
+      name: "Alyssa",
+      detail: "",
+      source: "google"
     },
     {
-      quote: "Placeholder — a third client quote. Short and specific works best.",
-      name: "Client name",
-      detail: "e.g. Training with Tristan since 2024"
+      quote: "Couldn't recommend Tristan more! As someone who has trained with him in the past and competed alongside him in strongman, he genuinely cares and wants to do good and just have fun whilst helping you change your life. Has a killer music taste too!",
+      name: "Jordan Cornell",
+      detail: "",
+      source: "google"
     }
   ]
 };
