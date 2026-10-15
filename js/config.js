@@ -8,8 +8,8 @@ window.SITE = {
 
   instagram: "https://www.instagram.com/tristanwstrongman/",
   instagramHandle: "@tristanwstrongman",
-  email: "",                       // e.g. "tristan@example.com"
-  phone: "",                       // e.g. "0400 000 000"
+  email: "tristanwstrong@gmail.com",                       // e.g. "tristan@example.com"
+  phone: "0450 249 975",                       // e.g. "0400 000 000"
 
   // Where the "Book a session" buttons go. Leave "" to send people to Instagram.
   bookingUrl: "",
